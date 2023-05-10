@@ -1,0 +1,15 @@
+<h1>本管理</h1>
+<a href="/books">Return</a>
+<%= form_with model: @book do |form| %>
+  <div>
+    <div><%= form.label :title %></div>
+    <div><%= form.text_field :title %></div>
+  </div>
+  <div>
+    <div><%= form.label :author %></div>
+    <div><%= form.text_field :author %></div>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

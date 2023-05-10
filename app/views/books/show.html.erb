@@ -1,0 +1,6 @@
+<h1>本管理</h1>
+<a href="/books">Return</a>
+<div>Title: <%= @book.title %></div>
+<div>Author: <%= @book.author %></div>
+<%= button_to "Edit", edit_book_path, method: :get %>
+<%= button_to "Delete", @book, method: :delete %>
