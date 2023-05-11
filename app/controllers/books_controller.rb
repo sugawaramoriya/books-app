@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  #before_action :correct_post, only: [:index, :show]
+
     def index
         @books = Book.all
     end
@@ -43,4 +45,11 @@ class BooksController < ApplicationController
       def book_params
         params.require(:book).permit(:title, :author)
       end
+
+      #def correct_post
+      #  @user = User.find(params[:id])
+      #  unless @user.user.id == current_user.id
+      #    redirect_to '/login'
+      #  end
+      #end
 end
