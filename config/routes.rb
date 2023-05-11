@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+  get 'users/login'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
+  get '/signup', to: 'users#input'
+  post '/signup', to: 'users#create'
+  get '/users/:id', to: 'users#show', as: 'profile'
+  delete '/users/:id', to: 'users#destroy', as: 'unsubscribe'
   get '/books',to: 'books#index'
   get '/books/new',to: 'books#new',as: :new_book
   post '/books', to: 'books#create'
