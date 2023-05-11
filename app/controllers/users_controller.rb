@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to profile_path(@user)
     else
-      render 'new'
+      render 'input'
     end
   end
 
