@@ -2,8 +2,7 @@ class BooksController < ApplicationController
   before_action :login_required
 
     def index 
-      #@books = Book.where(login_userId: current_user.id)
-      @books = Book.all
+      @books = Book.where(login_userId: current_user.id)
     end
 
     def show
@@ -17,7 +16,6 @@ class BooksController < ApplicationController
 
     def create
        @book = Book.new(book_params)
-       #@book = Book.new(title: params[:title],author: params[:author],login_userId: current_user.id)
        if @book.save
           redirect_to @book
        else
@@ -30,7 +28,7 @@ class BooksController < ApplicationController
     end
 
     def update
-        @book = Book.find(params[:id],current_user.id)
+        @book = Book.find(params[:id])
         if @book.update(book_params)
           redirect_to @book
         else
@@ -46,7 +44,7 @@ class BooksController < ApplicationController
       
     private
       def book_params
-        params.require(:book).permit(:title, :author)
+        params.require(:book).permit(:title, :author).merge(login_userId: current_user.id)
       end
 
       def login_required
