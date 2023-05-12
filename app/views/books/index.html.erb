@@ -5,4 +5,5 @@
   <% @books.each do |book| %>
     <li><a href="/books/<%= book.id %>"><%= book.title %></a></li>
   <% end %>
+  <%= button_to "ログアウト",{controller: 'sessions', action: 'destroy'}, method: :delete %>
 </ul>

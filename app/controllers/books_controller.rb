@@ -1,8 +1,9 @@
 class BooksController < ApplicationController
-  #before_action :correct_post, only: [:index, :show]
+  before_action :login_required
 
-    def index
-        @books = Book.all
+    def index 
+      #@books = Book.where(login_userId: current_user.id)
+      @books = Book.all
     end
 
     def show
@@ -11,10 +12,12 @@ class BooksController < ApplicationController
 
     def new
         @book = Book.new
+        @user = current_user
     end
 
     def create
        @book = Book.new(book_params)
+       #@book = Book.new(title: params[:title],author: params[:author],login_userId: current_user.id)
        if @book.save
           redirect_to @book
        else
@@ -27,7 +30,7 @@ class BooksController < ApplicationController
     end
 
     def update
-        @book = Book.find(params[:id])
+        @book = Book.find(params[:id],current_user.id)
         if @book.update(book_params)
           redirect_to @book
         else
@@ -46,10 +49,8 @@ class BooksController < ApplicationController
         params.require(:book).permit(:title, :author)
       end
 
-      #def correct_post
-      #  @user = User.find(params[:id])
-      #  unless @user.user.id == current_user.id
-      #    redirect_to '/login'
-      #  end
-      #end
+      def login_required
+        redirect_to login_path unless current_user
+        #ユーザーがログインしていない限り、ログイン画面にレダイレクトする
+      end
 end
