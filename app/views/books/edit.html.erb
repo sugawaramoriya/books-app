@@ -1,12 +1,12 @@
 <h1>Booksapp</h1>
-<a href="/books">Return</a>
+<a href="/books">戻る</a>
 <%= form_with model: @book do |form| %>
   <div>
-    <div><%= form.label :title %></div>
+    <div><%= form.label :タイトル %></div>
     <div><%= form.text_field :title %></div>
   </div>
   <div>
-    <div><%= form.label :author %></div>
+    <div><%= form.label :著者 %></div>
     <div><%= form.text_field :author %></div>
   </div>
   <div>

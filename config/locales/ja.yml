@@ -1,0 +1,6 @@
+ja:
+  activerecord:
+    attributes:
+      book:
+        title: タイトル
+        author: 著者

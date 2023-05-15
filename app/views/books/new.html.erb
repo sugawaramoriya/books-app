@@ -1,13 +1,21 @@
 <h1>Booksapp</h1>
-<a href="/books">Return</a>
-<%= link_to "Add", new_book_path %>
+<a href="/books">戻る</a>
 <%= form_with model: @book do |form| %>
+  <% if @book.errors.any? %>
+  <strong><%= @book.errors.count %>個のエラーがあります。</strong>
+  <ul>
+    <% @book.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
   <div>
-    <div><%= form.label :title %></div>
+    <div><%= form.label :タイトル %></div>
     <div><%= form.text_field :title %></div>
   </div>
   <div>
-    <div><%= form.label :author %></div>
+    <div><%= form.label :著者 %></div>
     <div><%= form.text_field :author %></div>
   </div>
   <div>

@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
         redirect_to '/books'
       else
         flash.now[:danger] = 'メールアドレスかパスワードが間違っています。'
-        render 'new'
+        render 'new', status: :unprocessable_entity
       end
     end
   

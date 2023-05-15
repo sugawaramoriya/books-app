@@ -1,6 +1,6 @@
 <h1>Booksapp</h1>
-<a href="/books">Return</a>
-<div>Title: <%= @book.title %></div>
-<div>Author: <%= @book.author %></div>
+<a href="/books">戻る</a>
+<div>タイトル: <%= @book.title %></div>
+<div>著者: <%= @book.author %></div>
 <%= button_to "Edit", edit_book_path, method: :get %>
 <%= button_to "Delete", @book, method: :delete %>
