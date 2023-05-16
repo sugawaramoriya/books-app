@@ -1,5 +1,5 @@
 <h1>ユーザー情報</h1>
-
+<%= link_to 'ログインはこちら', "/login" %>
 <p>メールアドレス：<%= @user.email %></p>
 <%# 以下を追記 %>
 <p><%= link_to 'ログアウト', logout_path, method: :delete %></p>

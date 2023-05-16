@@ -12,6 +12,8 @@ class BooksController < ApplicationController
     def new
         @book = Book.new
         @user = current_user
+        @item = []
+
     end
 
     def create
@@ -41,6 +43,20 @@ class BooksController < ApplicationController
         @book.destroy
         redirect_to books_path
       end
+
+      def search
+        if params[:title]
+          @item= []
+          if params[:title].present? || params[:isbn].present?
+            @item = RakutenWebService::Books::Book.search(keyword: params[:title])
+            Rails.logger.warn('=======================')
+            Rails.logger.warn(@item)
+            Rails.logger.warn('=======================')
+            render 'new'
+          end
+        end
+      end 
+
       
     private
       def book_params

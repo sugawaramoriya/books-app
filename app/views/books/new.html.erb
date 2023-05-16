@@ -1,14 +1,6 @@
 <h1>Booksapp</h1>
 <a href="/books">戻る</a>
 <%= form_with model: @book do |form| %>
-  <% if @book.errors.any? %>
-  <strong><%= @book.errors.count %>個のエラーがあります。</strong>
-  <ul>
-    <% @book.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
 
   <div>
     <div><%= form.label :タイトル %></div>
@@ -19,6 +11,28 @@
     <div><%= form.text_field :author %></div>
   </div>
   <div>
-    <%= form.submit %>
+  <div><%= form.label :概要 %></div>
+  <div><%= form.text_area :item_caption %></div>
+</div>
+  <div>
+  <%= form.submit %>
   </div>
-<% end %>
+  <% end %>
+
+  <%= form_with(url: books_search_path, method: :get, local: true) do |f| %>
+    <%= f.search_field :title, placeholder: "title", value: params[:title] %><br>
+    <%= f.search_field :isbn, placeholder: "isbn", value: params[:isbn] %><br>
+    <%= f.submit "検索" %>
+  <% end %>
+  <% @item.each do |item| %>
+    <div>
+      <ul>
+        <li><%= item.isbn %></li>
+        <li><%= item.title %></li>
+        <li><%= item.author %></li>
+        <li><%= item.item_price %></li>
+        <li><%= link_to "商品リンク", item.item_url %></li>
+      </ul>
+    </div>
+    <hr>
+  <% end %>

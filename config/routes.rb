@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/books',to: 'books#index'
   get '/books/new',to: 'books#new',as: :new_book
+  get '/books/search',to: 'books#search'
   post '/books', to: 'books#create'
   get '/books/:id',to: 'books#show',as: :book
   get 'books/:id/edit', to: 'books#edit', as: :edit_book
