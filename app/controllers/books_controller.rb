@@ -48,7 +48,7 @@ class BooksController < ApplicationController
         if params[:title]
           @item= []
           if params[:title].present? || params[:isbn].present?
-            @item = RakutenWebService::Books::Book.search(keyword: params[:title])
+            @item = RakutenWebService::Books::Book.search(title: params[:title])
             Rails.logger.warn('=======================')
             Rails.logger.warn(@item)
             Rails.logger.warn('=======================')
