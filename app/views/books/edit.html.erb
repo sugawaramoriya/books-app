@@ -10,6 +10,18 @@
     <div><%= form.text_field :author %></div>
   </div>
   <div>
+  <div><%= form.label :概要 %></div>
+  <div><%= form.text_area :item_caption, size: "40x10" %></div>
+</div>
+<div>
+<div><%= form.label :金額 %></div>
+<div><%= form.text_field :price %>円</div>
+</div>
+<div>
+<div><%= form.label :リンク %></div>
+<div><%= form.text_field :link %></div>
+</div>
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

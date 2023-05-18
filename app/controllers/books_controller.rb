@@ -12,14 +12,15 @@ class BooksController < ApplicationController
     def new
         @book = Book.new
         @user = current_user
-        @item = []
+        @items = []
 
     end
 
     def create
-       @book = Book.new(book_params)
+       @book = Book.new(title: params[:title],author: params[:author],item_caption: params[:item_caption],price: params[:item_price],link: params[:item_url])
+       @book.login_userId = current_user.id
        if @book.save
-          redirect_to @book
+          redirect_to '/books'
        else
           render :new, status: :unprocessable_entity
        end
@@ -46,13 +47,10 @@ class BooksController < ApplicationController
 
       def search
         if params[:title]
-          @item= []
-          if params[:title].present? || params[:isbn].present?
-            @item = RakutenWebService::Books::Book.search(title: params[:title])
-            Rails.logger.warn('=======================')
-            Rails.logger.warn(@item)
-            Rails.logger.warn('=======================')
-            render 'new'
+          @items= []
+          if params[:title].present?
+            @items = RakutenWebService::Books::Book.search(title: params[:title])
+            render :new
           end
         end
       end 
@@ -60,7 +58,7 @@ class BooksController < ApplicationController
       
     private
       def book_params
-        params.require(:book).permit(:title, :author).merge(login_userId: current_user.id)
+        params.require(:book).permit(:title, :author, :item_caption, :item_price, :item_url).merge(login_userId: current_user.id)
       end
 
       def login_required

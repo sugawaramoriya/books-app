@@ -2,5 +2,8 @@
 <a href="/books">戻る</a>
 <div>タイトル: <%= @book.title %></div>
 <div>著者: <%= @book.author %></div>
+<div>概要: <%= @book.item_caption %></div>
+<div>金額: <%= @book.price %>円</div>
+<div>商品リンク: <%= link_to "商品はこちら",  @book.link %></div>
 <%= button_to "Edit", edit_book_path, method: :get %>
 <%= button_to "Delete", @book, method: :delete %>

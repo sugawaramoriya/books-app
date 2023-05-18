@@ -1,38 +1,19 @@
 <h1>Booksapp</h1>
 <a href="/books">戻る</a>
-<%= form_with model: @book do |form| %>
-
-  <div>
-    <div><%= form.label :タイトル %></div>
-    <div><%= form.text_field :title %></div>
-  </div>
-  <div>
-    <div><%= form.label :著者 %></div>
-    <div><%= form.text_field :author %></div>
-  </div>
-  <div>
-  <div><%= form.label :概要 %></div>
-  <div><%= form.text_area :item_caption %></div>
-</div>
-  <div>
-  <%= form.submit %>
-  </div>
-  <% end %>
 
   <%= form_with(url: books_search_path, method: :get, local: true) do |f| %>
-    <%= f.search_field :title, placeholder: "title", value: params[:title] %><br>
-    <%= f.search_field :isbn, placeholder: "isbn", value: params[:isbn] %><br>
+    <%= f.search_field :title, placeholder: "タイトル", value: params[:title] %><br>
     <%= f.submit "検索" %>
   <% end %>
-  <% @item.each do |item| %>
+  <% @items.each do |item| %>
     <div>
       <ul>
-        <li><%= item.isbn %></li>
         <li><%= item.title %></li>
         <li><%= item.author %></li>
         <li><%= item.item_caption %></li>
         <li><%= item.item_price %>円</li>
         <li><%= link_to "商品リンク", item.item_url %></li>
+        <%= button_to "保存", {controller: 'books', action: 'create'}, {method: :post, params: {title: item.title, author: item.author,item_caption: item.item_caption,item_price: item.item_price,item_url: item.item_url}} %>
       </ul>
     </div>
     <hr>
